@@ -28,8 +28,27 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Appointment" asp-action="Index">Appointments</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Appointment" asp-action="ListAvailable">List</a>
+                        </li>
+                        <li class="nav-item">
+        <form asp-controller="Login" asp-action="Logout" method="post" class="form-inline">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-link nav-link">Logout</button>
+        </form>
+    </li>
                     </ul>
                 </div>
+            </div>
+            <div id="header">
+            <div id="appointments-list"> 
+            <h3>Available Appointments</h3> 
+            @await Html.PartialAsync("_AppointmentsListPartial", (List<Appointy.Data.Appointment>)ViewBag.AvailableAppointments)
+            </div> 
+            <div id="booked-appointments"> 
+            <h3>Booked Appointments</h3> 
+            @await Html.PartialAsync("_BookedAppointmentsPartial", (List<Appointy.Data.Booking>)ViewBag.BookedAppointments)
+            </div>
             </div>
         </nav>
     </header>
